@@ -23,23 +23,27 @@
       </label>
       <label>
         Invert:
+
         <input name="invert" data-sizing="%" type="range" min="0" max="100" value="0" />
-        <output name="result">0</output>
+        <output name="result"> <span>0</span>   </output>
+      
+      
+      
       </label>
       <label>
         Sepia:
-        <input name="sepia" data-sizing="%" type="range" min="0" max="100" value="0" />
-        <output name="result">0</output>
+        <input name="sepia" data-sizing="%" type="range" min="0" max="100" value="0" autofocus/>
+        <output name="value">0</output>
       </label>
       <label>
         Saturate:
         <input name="saturate" data-sizing="%" type="range" min="0" max="200" value="100" />
         <output name="result">100</output>
       </label>
-      <label>
+      <label for="Hue">
         Hue rotate:
-        <input name="hue" data-sizing="deg" type="range" min="0" max="360" value="0" />
-        <output name="result">0</output>
+        <input name="hue" id="Hue" data-sizing="deg" type="range" min="0" max="360" value="0" />
+        <output for="Hue" name="result">0</output>
       </label>
     </div>
     <div class="editor">
@@ -52,7 +56,11 @@
         </label>
         <button class="btn btn-save">Save picture</button>
       </div>
+      <!-- _______________________________________________________-->
       <img src="assets/img/img.jpg" alt="image" />
+      <canvas></canvas>
+      <!-- _______________________________________________________ -->
+
     </div>
   </main>
   <footer class="footer">
@@ -64,5 +72,18 @@
     </div>
   </footer>
   <button class="fullscreen openfullscreen"></button>
+  
+  
+  <script>
+    // Обработка изображений посредством переменных CSS (:root{})
+    const inputs = document.querySelectorAll('.filters input'); 
+    function handleUpdate() {
+      const suffix = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+    inputs.forEach(input => input.addEventListener('input', handleUpdate));
+  </script>
+
+
 </body>
 </html>
