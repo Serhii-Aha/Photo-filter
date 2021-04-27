@@ -48,7 +48,9 @@
     </div>
     <div class="editor">
       <div class="btn-container">
-        <button class="btn btn-reset">Reset</button>
+       
+        <button class="btn btn-reset" onclick="reset_Btn ()">Reset</button>
+        
         <button class="btn btn-next btn-active">Next picture</button>
         <label class="btn btn-load" for="btnInput">
           Load picture
@@ -75,21 +77,36 @@
   
   
   <script>
+//     var buttonReference = document.getElementsByClassName('btn btn-reset')[0];
+// buttonReference.onclick = 
+    function reset_Btn () {
+      // console.log('ygfygfyfjhfj');
+    document.documentElement.style.setProperty('--blur', '0px');
+    document.documentElement.style.setProperty('--invert', '0%');
+    document.documentElement.style.setProperty('--sepia', '0%');
+    document.documentElement.style.setProperty('--saturate','100%');
+    document.documentElement.style.setProperty('--hue', '0deg');
+    location.href = location.href;
+    // document.documentElement.style.getPropertyValue('--myVariable');
+    }
+
    
-    // Обработка изображений посредством переменных CSS (:root{})
+    // Обработка изображений посредством переменных CSS (:root{}) - inputs
+     // Добавление значения в поле output - outputs
     const inputs = document.querySelectorAll('.filters input'); 
+    const outputs = document.querySelector('.filters');
+
     function handleUpdate() {
       const suffix = this.dataset.sizing || '';
       document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix,);
+      
+     
+      outputs.addEventListener('input', (filtersElem) => {
+      const filtersItem = filtersElem.target;
+      filtersItem.nextElementSibling.value = filtersItem.value;    
+      })
     }
     inputs.forEach(input => input.addEventListener('input', handleUpdate));
-
-    // Добавление значения в поле output 
-    const outputs = document.querySelector('.filters');
-    outputs.addEventListener('input', (filtersElem) => {
-    const filtersItem = filtersElem.target;
-    filtersItem.nextElementSibling.value = filtersItem.value;
-    })
 
 </script>
 
